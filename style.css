@@ -1,8 +1,36 @@
+:root {
+  --color-accent: oklch(45.76% 0.3205 327.53);
+}
+
 body {
-    /* Set line height to 1.5 times the font size
-         and use the OS’s UI font as the website font
-       */
-    font: 100%/1.5 system-ui;
-    max-width: 100ch;
-    margin-inline: max(1em, (100% - 100ch) / 2);
-  }
+  font: 100%/1.5 system-ui;
+  max-width: 100ch;
+  margin-inline: max(1em, (100% - 100ch) / 2);
+}
+
+nav {
+  display: flex;
+  text-align: center;
+  padding: 0.5em;
+  margin-bottom: 1em;
+  border-bottom: 1px solid oklch(80% 3% 200);
+}
+
+nav a {
+  flex: 1;
+  text-decoration: none;
+  color: inherit;
+}
+
+nav a.current {
+  border-bottom: 0.4em solid oklch(80% 3% 220);
+  padding-bottom: 0.3em;
+  margin-bottom: -8px;
+}
+
+nav a:hover {
+  border-bottom: 0.4em solid var(--color-accent);
+  background-color: oklch(from var(--color-accent) 95% 5% h);
+  padding-bottom: 0.3em;
+  margin-bottom: -8px;
+}
