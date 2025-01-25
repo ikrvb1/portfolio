@@ -34,3 +34,19 @@ nav a:hover {
   padding-bottom: 0.3em;
   margin-bottom: -8px;
 }
+
+form {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1em;
+}
+
+form input, form textarea, form button {
+  font: inherit;
+}
+
+form label {
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column: 1 / -1;
+}
