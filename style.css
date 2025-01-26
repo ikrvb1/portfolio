@@ -1,5 +1,9 @@
 :root {
-  --color-accent: oklch(45.76% 0.3205 327.53);
+  --color-accent: oklch(88.68% 0.1821 95.33);
+}
+
+html {
+  color-scheme: light dark;
 }
 
 body {
@@ -13,7 +17,8 @@ nav {
   text-align: center;
   padding: 0.5em;
   margin-bottom: 1em;
-  border-bottom: 1px solid oklch(80% 3% 200);
+  border-bottom: 1px solid;
+  border-bottom-color: oklch(80% 3% 220);
 }
 
 nav a {
@@ -30,7 +35,7 @@ nav a.current {
 
 nav a:hover {
   border-bottom: 0.4em solid var(--color-accent);
-  background-color: oklch(from var(--color-accent) 95% 5% h);
+  background-color: color-mix(in oklch, var(--color-accent), canvas 85%);
   padding-bottom: 0.3em;
   margin-bottom: -8px;
 }
@@ -106,4 +111,11 @@ h3, h4, h5, h6 {
 
 .skills li {
   margin-bottom: 0.5em;
+}
+
+.color-scheme {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 80%;
 }
