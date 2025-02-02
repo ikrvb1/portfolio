@@ -1,13 +1,15 @@
 [
     {
-        "title": "Lorem ipsum dolor sit.",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quis reprehenderit corporis magnam commodi vitae eaque. Dolorum maxime ex dolorem soluta quaerat repellat, obcaecati consectetur, illum, enim labore tempora perferendis officiis."
+        "title": "A Study Run by Power Outages",
+        "year": "2024",
+        "image": "images/project1.jpg",
+        "description": "A project in which I studied and made visualizations about different outages all across the United States across many years. I made a model to predict which cities are at high risk of power outages."
     },
     {   
-        "title": "Provident iusto animi ut.",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Assumenda pariatur explicabo aspernatur non fugit odio repellendus fuga repudiandae ad enim sed voluptatem id temporibus quibusdam natus similique facere iusto, eligendi beatae placeat voluptas? Reiciendis tempore necessitatibus minima pariatur?"
+        "title": "San Francisco's Summer Fog",
+        "year": "2025",
+        "image": "images/project2.jpg",
+        "description": "A visualization in which we see a take about what factor contributes the most to the strange and wild fog during the summer in San Francisco."
     },
     {
         "title": "Culpa cupiditate facere quam.",
