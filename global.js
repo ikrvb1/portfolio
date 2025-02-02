@@ -58,7 +58,7 @@ window.addEventListener('load', () => {
     }
   });
   
-  export async function fetchJSON(url) {
+export async function fetchJSON(url) {
     try {
         const response = await fetch(url);
         if (!response.ok) {
