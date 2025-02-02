@@ -119,3 +119,23 @@ h3, h4, h5, h6 {
   right: 1rem;
   font-size: 80%;
 }
+
+#profile-stats dl {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 equal-sized columns */
+    gap: 10px;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+#profile-stats dt {
+    font-weight: bold;
+    grid-row: 1; /* Place all <dt> elements in the first row */
+}
+
+#profile-stats dd {
+    grid-row: 2; /* Place all <dd> elements in the second row */
+    margin: 0;
+}
+

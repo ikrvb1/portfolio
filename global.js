@@ -95,3 +95,8 @@ export function renderProjects(projects, containerElement, headingLevel = 'h2') 
     containerElement.appendChild(article);
   });
 }
+
+export async function fetchGitHubData(username) {
+  const response = await fetch(`https://api.github.com/users/${username}`);
+  return response.json();
+}
