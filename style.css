@@ -122,7 +122,7 @@ h3, h4, h5, h6 {
 
 #profile-stats dl {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 equal-sized columns */
+    grid-template-columns: repeat(4, 1fr);
     gap: 10px;
     padding: 15px;
     border-radius: 8px;
@@ -131,17 +131,17 @@ h3, h4, h5, h6 {
 
 #profile-stats dt {
     font-weight: bold;
-    grid-row: 1; /* Place all <dt> elements in the first row */
+    grid-row: 1;
 }
 
 #profile-stats dd {
-    grid-row: 2; /* Place all <dd> elements in the second row */
+    grid-row: 2;
     margin: 0;
 }
 
 img {
-  max-width: 270px; /* Adjust as needed */
-  height: auto; /* Maintains aspect ratio */
+  max-width: 270px;
+  height: auto;
 }
 
 .project-year {
@@ -154,4 +154,32 @@ img {
   margin-block: 2em;
 
   overflow: visible;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1em;
+}
+
+.legend {
+  list-style: none;
+  padding: 0;
+  margin: 1em 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(8em, 1fr));
+}
+
+.legend li {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.legend .swatch {
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  border-radius: 0.25em;
+  background-color: var(--color);
 }
