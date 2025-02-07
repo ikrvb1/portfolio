@@ -143,3 +143,15 @@ img {
   max-width: 270px; /* Adjust as needed */
   height: auto; /* Maintains aspect ratio */
 }
+
+.project-year {
+  font-family: Baskerville;
+  font-variant-numeric: oldstyle-nums;
+}
+
+#projects-plot {
+  max-width: 20em;
+  margin-block: 2em;
+
+  overflow: visible;
+}
