@@ -191,3 +191,30 @@ img {
   border: 1px solid #ccc;
   border-radius: 5px;
 }
+
+&:has(path:hover) {
+  path:not(:hover) {
+    opacity: 0.5;
+  }
+}
+
+path {
+  transition: 300ms;
+  cursor: pointer;
+}
+
+.selected {
+  --color: oklch(88.68% 0.1821 95.33) !important;
+
+  &:is(path) {
+    fill: var(--color);
+  }
+}
+
+.selected:is(path) {
+  fill: var(--color);
+}
+
+.selected:is(li) {
+  font-weight: bold; /* Make legend stand out */
+}

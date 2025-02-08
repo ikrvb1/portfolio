@@ -15,6 +15,8 @@ if (projects && Array.isArray(projects)) {
   }
 }
 
+let selectedIndex = -1;
+
 function renderPieChart(projectsGiven) {
   d3.select('svg').selectAll('*').remove();
   d3.select('.legend').selectAll('*').remove();
@@ -37,17 +39,43 @@ function renderPieChart(projectsGiven) {
   let colors = d3.scaleOrdinal(d3.schemeTableau10);
 
   let svg = d3.select('svg');
+  svg.selectAll("path").remove();
 
   arcData.forEach((d, idx) => {
-    svg.append('path')
-      .attr('d', arcGenerator(d))
-      .attr('fill', colors(idx));
+    svg
+      .append("path")
+      .attr("d", arcGenerator(d))
+      .attr("fill", colors(idx))
+      .attr("class", idx === selectedIndex ? "selected" : "") // Apply class if selected
+      .style("cursor", "pointer") // Show it's clickable
+      .on("click", () => {
+        selectedIndex = selectedIndex === idx ? -1 : idx; // Toggle selection
+
+        // Update paths
+        svg.selectAll("path").attr("class", (_, i) =>
+          i === selectedIndex ? "selected" : ""
+        );
+
+        // Update legend
+        legend.selectAll("li").attr("class", (_, i) =>
+          i === selectedIndex ? "selected" : ""
+        );
+
+        if (selectedIndex === -1) {
+          renderProjects(projects, projectsContainer, 'h2');
+        } else {
+          let selectedYear = data[selectedIndex].label;
+          let filteredProjects = projects.filter(project => project.year === selectedYear);
+          renderProjects(filteredProjects, projectsContainer, 'h2');
+        }
+      });
   });
 
   let legend = d3.select('.legend');
   data.forEach((d, idx) => {
     legend.append('li')
           .attr('style', `--color:${colors(idx)}`)
+          .attr('class', idx === selectedIndex ? "selected" : "") // Apply class if selected
           .html(`<span class="swatch"></span> ${d.label} <em>(${d.value})</em>`);
   });
 }
@@ -64,3 +92,4 @@ searchInput.addEventListener('input', (event) => {
   renderProjects(filteredProjects, projectsContainer, 'h2');
   renderPieChart(filteredProjects);
 });
+
