@@ -2,13 +2,13 @@
     {
         "title": "A Study Run by Power Outages",
         "year": "2024",
-        "image": "images/project1.jpg",
+        "image": "../images/project1.jpg",
         "description": "A project in which I studied and made visualizations about different outages all across the United States across many years. I made a model to predict which cities are at high risk of power outages."
     },
     {   
         "title": "San Francisco's Summer Fog",
         "year": "2025",
-        "image": "images/project2.jpg",
+        "image": "../images/project2.jpg",
         "description": "A visualization in which we see a take about what factor contributes the most to the strange and wild fog during the summer in San Francisco."
     },
     {
