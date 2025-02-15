@@ -1,0 +1,44 @@
+name: Build and Generate CSV
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: '0'
+
+      - name: Install Node.js
+        uses: actions/setup-node@v18
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Elocuent
+        run: |
+          npx elocuent -d . -o meta/loc.csv  # Run elocuent and save output to 'meta/loc.csv'
+
+      - name: Commit and Push
+        run: |
+          git config --local user.email "action@github.com"  # Set GitHub Actions user email
+          git config --local user.name "GitHub Action"  # Set GitHub Actions username
+          mkdir -p meta  # Create meta directory if it doesn’t exist
+          git pull  # Pull latest changes to ensure we're up-to-date
+          git add -f meta/loc.csv  # Add the generated CSV
+          git commit -m "Update code statistics" || echo "No changes to commit"  # Commit with message
+          git push  # Push changes to GitHub
