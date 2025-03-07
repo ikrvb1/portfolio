@@ -256,6 +256,24 @@ dl.info dt {
 dl.info dd {
   margin: 0;  /* Remove default margin */
   font-weight: normal;/* Set dd color to a darker gray */
+  transition-duration: 500ms;
+  transition-property: opacity, visibility;
+}
+
+dl.info[hidden]:not(:hover, :focus-within) {
+  opacity: 0;
+  visibility: hidden;
+}
+
+circle {
+  transition: 200ms;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+circle:hover {
+  transform: scale(1.5);
+  fill-opacity: 1;
 }
 
 /* Styling for .tooltip */
@@ -306,4 +324,8 @@ dl.info dd {
 
 #commit-tooltip dt {
   font-weight: bold;
+}
+
+circle.selected {
+  fill: #ff6b6b;
 }
