@@ -111,7 +111,7 @@ function drawCircles() {
     .join('circle')
     .attr('cx', (d) => xScale(d.datetime))
     .attr('cy', (d) => yScale(d.hourFrac))
-    .attr('r', 5)
+    .attr('r', 200)
     .attr('fill', 'steelblue');
 }
 
@@ -146,19 +146,16 @@ function createScatterplot() {
     yScale.range([usableArea.bottom, usableArea.top]);
   
     // Add gridlines BEFORE the axes
-const gridlines = svg.append('g')
-.attr('class', 'gridlines')
-.attr('transform', `translate(${usableArea.left}, 0)`);
-
-// Create gridlines as an axis with no labels and full-width ticks
-gridlines.call(d3.axisLeft(yScale).tickFormat('').tickSize(-usableArea.width));
-
-// Style the gridlines to make them lighter
-gridlines.selectAll('line')
-.attr('stroke', '#ccc')       // Lighter gray color
-.attr('stroke-opacity', 0.5)  // Make them slightly transparent
-.attr('stroke-width', 1);     // Thin lines for the grid
-
+    const gridlines = svg.append('g')
+      .attr('class', 'gridlines')
+      .attr('transform', `translate(${usableArea.left}, 0)`);
+  
+    gridlines.call(d3.axisLeft(yScale).tickFormat('').tickSize(-usableArea.width));
+    gridlines.selectAll('line')
+      .attr('stroke', '#ccc')
+      .attr('stroke-opacity', 0.5)
+      .attr('stroke-width', 1);
+  
     // Create the axes
     const xAxis = d3.axisBottom(xScale);
     const yAxis = d3.axisLeft(yScale)
@@ -176,27 +173,44 @@ gridlines.selectAll('line')
   
     // Draw circles for the scatterplot
     const dots = svg.append('g').attr('class', 'dots');
+  
+    // Sort commits by total lines in descending order
+    const sortedCommits = d3.sort(commits, (d) => -d.totalLines);
+  
+    // Set the radius scale based on the min and max lines edited
+    const [minLines, maxLines] = d3.extent(sortedCommits, (d) => d.totalLines);
+    const rScale = d3.scaleSqrt().domain([minLines, maxLines]).range([2, 30]);
+  
+    // Create dots based on sorted commits
     dots.selectAll('circle')
-      .data(commits)
+      .data(sortedCommits)
       .join('circle')
       .attr('cx', (d) => xScale(d.datetime))
       .attr('cy', (d) => yScale(d.hourFrac))
-      .attr('r', 5)
-      .attr('fill', 'steelblue')
+      .attr('r', (d) => rScale(d.totalLines))
+      .attr('fill', 'steelblue') // Ensure the fill color is set explicitly
+      .style('fill-opacity', 0.7) // Add transparency for overlapping dots
+      .on('mouseenter', function (event, d) {
+        d3.select(event.currentTarget).style('fill-opacity', 1);
+      })
+      .on('mouseleave', function (event, d) {
+        d3.select(event.currentTarget).style('fill-opacity', 0.7);
+      })
       .on('mouseover', showTooltip)
       .on('mousemove', showTooltip) // Update position on mouse move
       .on('mouseout', hideTooltip);
   }
+  
 
-  function updateTooltipContent(commit) {
-    const link = document.getElementById('commit-link');
-    const date = document.getElementById('commit-date');
-  
-    if (Object.keys(commit).length === 0) return;
-  
-    link.href = commit.url;
-    link.textContent = commit.id;
-    date.textContent = commit.datetime?.toLocaleString('en', {
-      dateStyle: 'full',
-    });
-  }
+function updateTooltipContent(commit) {
+  const link = document.getElementById('commit-link');
+  const date = document.getElementById('commit-date');
+
+  if (Object.keys(commit).length === 0) return;
+
+  link.href = commit.url;
+  link.textContent = commit.id;
+  date.textContent = commit.datetime?.toLocaleString('en', {
+    dateStyle: 'full',
+  });
+}
