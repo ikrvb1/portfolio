@@ -201,6 +201,7 @@ function createScatterplot() {
       .on('mouseout', hideTooltip);
   }
   
+  
 
 function updateTooltipContent(commit) {
   const link = document.getElementById('commit-link');
@@ -214,3 +215,4 @@ function updateTooltipContent(commit) {
     dateStyle: 'full',
   });
 }
+
