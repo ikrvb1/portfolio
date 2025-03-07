@@ -115,6 +115,20 @@ function drawCircles() {
     .attr('fill', 'steelblue');
 }
 
+function showTooltip(event, d) {
+  const tooltip = d3.select('#commit-tooltip');
+  tooltip.style('display', 'block');
+  tooltip.style('left', `${event.pageX + 10}px`);
+  tooltip.style('top', `${event.pageY + 10}px`);
+  tooltip.select('#commit-link').attr('href', d.url).text(d.id);
+  tooltip.select('#commit-date').text(d.date);
+  // Add more details as needed
+}
+
+function hideTooltip() {
+  d3.select('#commit-tooltip').style('display', 'none');
+}
+
 function createScatterplot() {
     // Define margins and usable area
     const margin = { top: 10, right: 10, bottom: 30, left: 20 };
@@ -168,5 +182,21 @@ gridlines.selectAll('line')
       .attr('cx', (d) => xScale(d.datetime))
       .attr('cy', (d) => yScale(d.hourFrac))
       .attr('r', 5)
-      .attr('fill', 'steelblue');
+      .attr('fill', 'steelblue')
+      .on('mouseover', showTooltip)
+      .on('mousemove', showTooltip) // Update position on mouse move
+      .on('mouseout', hideTooltip);
+  }
+
+  function updateTooltipContent(commit) {
+    const link = document.getElementById('commit-link');
+    const date = document.getElementById('commit-date');
+  
+    if (Object.keys(commit).length === 0) return;
+  
+    link.href = commit.url;
+    link.textContent = commit.id;
+    date.textContent = commit.datetime?.toLocaleString('en', {
+      dateStyle: 'full',
+    });
   }

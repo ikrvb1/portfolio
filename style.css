@@ -239,5 +239,40 @@ path {
   margin: 0;
 }
 
+/* Styling for dl.info */
+dl.info {
+  display: grid;
+  grid-template-columns: 1fr 3fr;  /* dt in 1st column, dd in 2nd column */
+  gap: 0.5em;  /* Add spacing between columns */
+  margin: 0;  /* Remove default margins */
+}
 
+dl.info dt {
+  font-weight: bold;  /* Make dt text bold */
+  margin: 0;  /* Remove any default margin */
+  text-align: right;  /* Align dt to the right for a clean look */
+}
 
+dl.info dd {
+  margin: 0;  /* Remove default margin */
+  font-weight: normal;/* Set dd color to a darker gray */
+}
+
+/* Styling for .tooltip */
+.tooltip {
+  position: absolute;
+  display: none;
+  padding: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  pointer-events: none;
+  z-index: 10;
+  text-align: right; /* Align text to the right */
+}
+
+.tooltip dt {
+  font-weight: bold;
+}
+
+.tooltip dd {
+  margin: 0 0 10px 0;
+}
